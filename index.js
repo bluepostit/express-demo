@@ -31,6 +31,20 @@ app.get("/api/staff", (req, res) => {
   });
 });
 
+app.get("/api/staff/:employee", (req, res) => {
+  console.log("params I got:", req.params);
+  const employee = req.params.employee;
+  if (staffData.includes(employee)) {
+    res.json({
+      data: `${employee} is a valued employee at our company`,
+    });
+  } else {
+    res.status(404).json({
+      error: "Not found",
+    });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
 });
