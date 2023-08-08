@@ -10,6 +10,8 @@ const aboutData = {
   established: 2000,
 };
 
+const staffData = ["sally", "mike", "rachel", "john"];
+
 app.get("/", (req, res) => {
   console.log("got a request for /");
   // res.send("Hi there, everyone!");
@@ -21,6 +23,12 @@ app.get("/", (req, res) => {
 
 app.get("/api/about", (req, res) => {
   res.json(aboutData);
+});
+
+app.get("/api/staff", (req, res) => {
+  res.json({
+    data: staffData,
+  });
 });
 
 app.listen(PORT, () => {
