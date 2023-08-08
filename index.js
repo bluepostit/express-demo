@@ -4,6 +4,10 @@ import path from "path";
 const PORT = process.env.PORT || 3000;
 const app = express();
 
+// add the json middleware to our app
+// allows us to parse JSON body from requests
+app.use(express.json());
+
 const aboutData = {
   name: "Cool Company",
   description: "We do things well and make a difference",
@@ -43,6 +47,21 @@ app.get("/api/staff/:employee", (req, res) => {
       error: "Not found",
     });
   }
+});
+
+app.get("/contact", (req, res) => {
+  // Find the file index.html in this directory, and send it.
+  const dirName = path.dirname(new URL(import.meta.url).pathname);
+  res.sendFile(path.join(dirName, "/contact-page.html"));
+});
+
+app.post("/contact", (req, res) => {
+  console.log("request body:", req.body);
+
+  res.json({
+    success: true,
+    location: "/",
+  });
 });
 
 app.listen(PORT, () => {
